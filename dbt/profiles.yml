@@ -1,0 +1,9 @@
+# Local DuckDB warehouse. No credentials, so safe to commit. Run dbt from inside dbt/.
+velora:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../warehouse/velora.duckdb
+      schema: main
+      threads: 4

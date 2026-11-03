@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: fct_orders
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+  - name: dim_customers
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+  - name: fct_marketing_spend_daily
+    columns:
+      - name: channel
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments: {values: ['Meta', 'TikTok', 'DV360', 'Affiliate', 'Email', 'Google Brand Search', 'Google Non-Brand Search']}
+      - name: spend_eur
+        data_tests: [not_null]
+  - name: mart_channel_performance_weekly
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: ['week', 'channel']}
+  - name: mart_attribution
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: ['model', 'channel']}
+    columns:
+      - name: model
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['last_click', 'first_click', 'linear', 'position_based']}
+  - name: mart_geo_test_daily
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: ['date', 'region']}
+    columns:
+      - name: geo_test_group
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['treatment', 'control']}
+  - name: mart_cohorts
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: ['first_order_month', 'months_since']}
+  - name: mart_business_weekly
+    columns:
+      - name: week
+        data_tests: [unique, not_null]
