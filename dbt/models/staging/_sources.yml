@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    description: Synthetic Velora marketing and order data, loaded from Parquet by scripts/load_to_duckdb.py.
+    tables:
+      - name: raw_regions
+        columns:
+          - name: region
+            data_tests: [unique, not_null]
+      - name: raw_campaigns
+        columns:
+          - name: campaign_id
+            data_tests: [unique, not_null]
+      - name: raw_ads
+        columns:
+          - name: ad_id
+            data_tests: [unique, not_null]
+      - name: raw_platform_geo_daily
+      - name: raw_ad_daily
+      - name: raw_affiliate_costs
+      - name: raw_email_sends
+      - name: raw_ga4_daily_traffic
+      - name: raw_ga4_conversion_paths
+      - name: raw_orders
+        columns:
+          - name: order_id
+            data_tests: [unique, not_null]
+      - name: raw_customers
+        columns:
+          - name: customer_id
+            data_tests: [unique, not_null]

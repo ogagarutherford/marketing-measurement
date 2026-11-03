@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: stg_campaigns
+    columns:
+      - name: campaign_id
+        data_tests: [unique, not_null]
+      - name: channel
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['Meta', 'TikTok', 'DV360', 'Affiliate', 'Google Brand Search', 'Google Non-Brand Search']}
+  - name: stg_platform_geo_daily
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: ['spend_date', 'campaign_id', 'region']}
+    columns:
+      - name: campaign_id
+        data_tests:
+          - relationships:
+              arguments: {to: ref('stg_campaigns'), field: campaign_id}
+      - name: region
+        data_tests:
+          - relationships:
+              arguments: {to: ref('stg_regions'), field: region}
+  - name: stg_ga4_conversion_paths
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: ['transaction_id', 'touch_sequence']}
+    columns:
+      - name: transaction_id
+        data_tests:
+          - relationships:
+              arguments: {to: ref('stg_orders'), field: order_id}
+      - name: channel
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['Meta', 'TikTok', 'DV360', 'Affiliate', 'Email', 'Google Brand Search', 'Google Non-Brand Search', 'Organic Search', 'Direct']}
+  - name: stg_orders
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests:
+          - relationships:
+              arguments: {to: ref('stg_customers'), field: customer_id}
+      - name: order_status
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['completed', 'returned', 'cancelled']}

@@ -1,0 +1,27 @@
+name: velora
+version: "1.0.0"
+config-version: 2
+profile: velora
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  geo_pre_start: "2025-03-10"
+  geo_test_start: "2025-05-05"
+  geo_test_end: "2025-06-01"
+
+models:
+  velora:
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table

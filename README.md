@@ -27,6 +27,6 @@ python scripts/load_to_duckdb.py     # loads warehouse/velora.duckdb and prints 
 
 ## Progress
 - [x] Day 12 — business questions, metric spec, attribution approach, geo test design, privacy note, synthetic data, DuckDB load
-- [ ] Day 13 — dbt models: unified spend, channel KPIs, attribution models, cohorts
+- [x] Day 13 — dbt models: unified spend, channel KPIs, attribution models, cohorts
 - [ ] Day 14 — geo test analysis (difference-in-differences), ROAS vs iROAS, contribution economics
 - [ ] Day 15 — Looker Studio dashboard, budget recommendation, README findings, v1.0
