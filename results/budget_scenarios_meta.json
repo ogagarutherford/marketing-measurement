@@ -1,0 +1,11 @@
+{
+  "current_monthly_meta_spend_eur": 98611.57999999993,
+  "curve_exponent": 0.75,
+  "ltv_multiplier": 1.4945740993960948,
+  "breakeven_monthly_spend_eur": 43298.84304126028,
+  "cut50_gain_6m_by_exponent": {
+    "0.6": 21996.03219231611,
+    "0.75": 16766.752923730375,
+    "0.9": 12053.86256379624
+  }
+}
